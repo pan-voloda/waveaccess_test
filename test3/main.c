@@ -25,28 +25,27 @@ char* json_parser_str(cJSON* data, char* str)
     return objStr;
 }
 
+void extract_words(char *str, uint16_t *result) {
+    int i, j;
+    char temp[5]; 
+    for (i = 0, j = 0; i < strlen(str); i += 4, j++) {
+        strncpy(temp, &str[i], 4); 
+        temp[4] = '\0'; 
+        result[j] = strtol(temp, NULL, 16); 
+    }
+}
 
 int main() {
     char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
-    char str1[] = "\0";
-    char str2[] = "\0";
-    int value = 0;
-    uint8_t byte[2][20];
-    uint8_t bytes[20];
-    for(int i = 0; i < 42; i++)
-    {
-        str1[0]=str[2*i];
-        str2[0]=str[2*i+1];
-        strcat(str1,str2);
-        value = strtol(str1, NULL, 16);
-        byte[i%2][i/2]= (uint8_t)value;
-        printf("%02x ", byte[i%2][i/2]);
-        if(i%2!=0) {printf("\n");}
+    uint16_t words[20];
+    extract_words(str, words);
 
-        memset(str1, 0, sizeof(str1));
-        memset(str2, 0, sizeof(str2));
+    printf("Результат:\n");
+    for (int i = 0; i < 21; i++) {
+        printf("%04x ", words[i]); // Выводим каждый элемент массива как четырехзначное шестнадцатеричное число
     }
-
+    printf("\n");
+    
     FILE *fp = fopen("mc_test.json", "r"); 
     if (fp == NULL) { 
         printf("Error: Unable to open the file.\n"); 
