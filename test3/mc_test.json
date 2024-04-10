@@ -313,7 +313,7 @@
             "word": 6,
             "bit": 0,
             "len": 8,
-            "params": {
+            "params": { 
                 "min": 0,
                 "max": 100,
                 "step": 1
