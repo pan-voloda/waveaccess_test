@@ -7,12 +7,12 @@ int main() {
     temp=a;
     while(1)
     {
-        if(a%b!=0)
+        if(temp%b!=0)
         {
-            a++;
+            temp++;
         }
         else break;
     }
-    printf("%d", a-temp);
+    printf("%d", temp-a);
     return 0;
 }
