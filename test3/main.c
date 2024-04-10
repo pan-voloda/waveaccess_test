@@ -12,7 +12,11 @@ int json_parser(cJSON* data, char* str)
     printf("%s: %d\n",str, objValue);
     return objValue;
 }
-
+int bit(int n)
+{
+int x=1;
+return x = x << n;
+}
 char* json_parser_str(cJSON* data, char* str)
 {
     cJSON* obj = cJSON_GetObjectItem(data, str);
@@ -20,13 +24,16 @@ char* json_parser_str(cJSON* data, char* str)
     printf("%s: %s\n",str, objStr);
     return objStr;
 }
+
+
 int main() {
     char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
     char str1[] = "\0";
     char str2[] = "\0";
     int value = 0;
     uint8_t byte[2][20];
-    for(int i = 0; i <42; i++)
+    uint8_t bytes[20];
+    for(int i = 0; i < 42; i++)
     {
         str1[0]=str[2*i];
         str2[0]=str[2*i+1];
