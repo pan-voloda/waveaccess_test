@@ -19,7 +19,7 @@ return x = x << n;
 }
 int bits1(int len)
 {
-    int x = bit(len+1);
+    int x = bit(len);
     return x-1;
 }
 char* json_parser_str(cJSON* data, char* str)
@@ -48,7 +48,7 @@ void printBinary(unsigned int num) {
 }
 
 int main() {
-    char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c00";
+    char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
     uint16_t words[20];
     extract_words(str, words);
 
@@ -108,13 +108,13 @@ int main() {
         testData = cJSON_GetArrayItem(testDataArray, i);
 
         nameValue=json_parser(testData, "name");
-        printf("Num: %d\n", nameValue);
+        printf("Name_%d: ", nameValue);
         dataTypeValue=json_parser_str(testData, "dataType");
         word = cJSON_GetObjectItem(testData, "word");
         if (word != NULL) 
         {
             wordValue = word->valueint;
-            printf("word: %d\n", wordValue);
+            //printf("word: %d\n", wordValue);
         } else {
             printf("Error: Unable to get word.\n");
         }
@@ -125,13 +125,15 @@ int main() {
         cmd = words[wordValue-1];
         bitValue=json_parser(testData, "bit");
         lenValue=json_parser(testData, "len");
-        printf("bit:%d\n", bitValue);
-        printf("len:%d\n", lenValue);
+        //printf("bit:%d\n", bitValue);
+        //printf("len:%d\n", lenValue);
         cmd = cmd >> (16-(bitValue+lenValue));
+        //printf("cmd: %04x\n", cmd);
         mask = bits1(lenValue);
+        //printf("mask: %04x\n", mask);
         cmd = cmd & mask;
         
-        printf("command: %04x\n", cmd);
+        //printf("command: %04x\n", cmd);
         //printBinary(cmd);
 
         paramsArray = cJSON_GetObjectItem(testData, "params");
@@ -171,11 +173,11 @@ int main() {
                     {
                     if(strcmp(dataTypeValue,"bool")==0)
                     {
-                        printf("Answer: %s\n", realValValue ? "true" : "false");
+                        printf("%s\n", realValValue ? "true" : "false");
                     }
                     else if(strcmp(dataTypeValue,"int")==0)
                     {
-                        printf("Answer: %d\n", realValValue);
+                        printf("%d\n", realValValue);
                     }
                         
                     }
@@ -195,7 +197,7 @@ int main() {
                             someval=minValValue+(someval-maxValValue);
                         }
                     }
-                    printf("Answer: %d\n", someval);
+                    printf("%d\n", someval);
                     j=3;
                 } else if ((strcmp(dataTypeValue, "string")==0)&&(paramsArraySize!=0)&&(test2!=NULL))
                 {
