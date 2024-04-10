@@ -25,22 +25,21 @@ int main() {
     char str1[] = "\0";
     char str2[] = "\0";
     int value = 0;
-    uint8_t byte[2][36];
-    for(int i = 0; i <72; i++)
+    uint8_t byte[2][20];
+    for(int i = 0; i <42; i++)
     {
         str1[0]=str[2*i];
         str2[0]=str[2*i+1];
         strcat(str1,str2);
-        // printf("%s \n", str1);
         value = strtol(str1, NULL, 16);
         byte[i%2][i/2]= (uint8_t)value;
-        // printf("%02x ", byte[i%2][i/2]);
-        // if(i%2!=0) {printf("\n");}
+        printf("%02x ", byte[i%2][i/2]);
+        if(i%2!=0) {printf("\n");}
 
         memset(str1, 0, sizeof(str1));
         memset(str2, 0, sizeof(str2));
     }
-    // open the file 
+
     FILE *fp = fopen("mc_test.json", "r"); 
     if (fp == NULL) { 
         printf("Error: Unable to open the file.\n"); 
@@ -97,6 +96,10 @@ int main() {
             printf("word: %d\n", wordValue);
         } else {
             printf("Error: Unable to get word.\n");
+        }
+        if(wordValue>20)
+        {
+            break;
         }
         bitValue=json_parser(testData, "bit");
         lenValue=json_parser(testData, "len");
