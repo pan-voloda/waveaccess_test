@@ -1,0 +1,8 @@
+{
+    "cmake.sourceDirectory": "C:/dev/waveaccess_test/test3/build",
+    "files.associations": {
+        "*.cpp": "cpp",
+        "stdint.h": "c",
+        "cjson.h": "c"
+    }
+}
