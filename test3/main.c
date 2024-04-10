@@ -5,20 +5,20 @@
 #include "cjson/cJSON.c"
 #include "stdint.h"
 
-void json_parser(cJSON* data, char* str, int var)
+int json_parser(cJSON* data, char* str)
 {
-        cJSON* obj = cJSON_GetObjectItem(data, str);
-        if (var == 0)
-        {
-        int objValue = obj->valueint;
-        printf("%s: %d\n",str, objValue);
-        } 
-        else
-        {
-        char* objStr = obj->valuestring;
-        printf("%s: %s\n",str, objStr);
-        }
+    cJSON* obj = cJSON_GetObjectItem(data, str);
+    int objValue = obj->valueint;
+    printf("%s: %d\n",str, objValue);
+    return objValue;
+}
 
+char* json_parser_str(cJSON* data, char* str)
+{
+    cJSON* obj = cJSON_GetObjectItem(data, str);
+    char* objStr = obj->valuestring;
+    printf("%s: %s\n",str, objStr);
+    return objStr;
 }
 int main() {
     char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
@@ -47,7 +47,7 @@ int main() {
         return 1; 
     } 
  
-    char buffer[1048576]; 
+    char buffer[100000]; 
     int length = fread(buffer, 1, sizeof(buffer), fp); 
     fclose(fp); 
   
@@ -71,63 +71,35 @@ int main() {
     int lenValue;
     int paramsArraySize;
 
-    int realValValue, valValue, minValValue = 0;
-    int maxValValue, stepValValue, paramLenValValue, wordValValue, bitValValue;
+    int realValValue, valValue, minValValue, maxValValue, stepValValue, paramLenValValue, wordValValue, bitValValue;
 
     cJSON *testData;
-    cJSON *name;
-    cJSON *dataType;
     cJSON *word;
-    cJSON *bit;
-    cJSON *len;
     cJSON *paramsArray;
 
     cJSON *params;
     cJSON *realVal;
     cJSON *val;
 
-    cJSON *minVal;
-    cJSON *maxVal;
-    cJSON *stepVal;
-
-    cJSON *paramLenVal;
-    cJSON *wordVal;
-    cJSON *bitVal;
-    cJSON *valVal;
-    cJSON *strVal;
-
     cJSON *test1;
     cJSON *test2;
-    cJSON *test3;
     char* string="\0";
 
     for (int i = 0; i < testDataArraySize; i++) {
         testData = cJSON_GetArrayItem(testDataArray, i);
 
-        name = cJSON_GetObjectItem(testData, "name");
-        nameValue = name->valueint;
-        printf("name: %d\n", nameValue);
-
-        dataType = cJSON_GetObjectItem(testData, "dataType");
-        dataTypeValue = dataType->valuestring;
-        printf("dataType: %s\n", dataTypeValue);
-        
+        nameValue=json_parser(testData, "name");
+        dataTypeValue=json_parser_str(testData, "dataType");
         word = cJSON_GetObjectItem(testData, "word");
-        if (word != NULL) {
+        if (word != NULL) 
+        {
             wordValue = word->valueint;
             printf("word: %d\n", wordValue);
-            } else {
+        } else {
             printf("Error: Unable to get word.\n");
-            }
-
-
-        bit = cJSON_GetObjectItem(testData, "bit");
-        bitValue = bit->valueint;
-        printf("bit: %d\n", bitValue);
-
-        len = cJSON_GetObjectItem(testData, "len");
-        lenValue = len->valueint;
-        printf("len: %d\n", lenValue);
+        }
+        bitValue=json_parser(testData, "bit");
+        lenValue=json_parser(testData, "len");
 
         paramsArray = cJSON_GetObjectItem(testData, "params");
         paramsArraySize = cJSON_GetArraySize(paramsArray);
@@ -136,8 +108,7 @@ int main() {
 
         if( paramsArraySize == 0)
         {
-            strVal = cJSON_GetObjectItem(testData, "params");
-            string = strVal->valuestring;
+            string=json_parser_str(testData, "params");
             printf("string: %s\n", string);  
         }
         for (int j = 0; j < paramsArraySize; j++) 
@@ -145,10 +116,12 @@ int main() {
                 params = cJSON_GetArrayItem(paramsArray, j);
                 test1 = cJSON_GetObjectItem(params, "realVal");
                 test2 = cJSON_GetObjectItem(params, "paramLen");
+
                 if((strcmp(dataTypeValue, "bool")==0 || strcmp(dataTypeValue, "int")==0)&&(test1!=NULL))
                 {
                     realVal = cJSON_GetObjectItem(params, "realVal");
                     realValValue = realVal->valueint;
+
                     if(strcmp(dataTypeValue,"bool")==0)
                     {
                         printf("realVal: %s\n", realValValue ? "true" : "false");
@@ -158,54 +131,21 @@ int main() {
                         printf("realVal: %d\n", realValValue);
                     }
             
+                    valValue=json_parser(params, "val");
 
-                    valVal = cJSON_GetObjectItem(params, "val");
-                    valValue = valVal->valueint;
-                    printf("val: %d\n", valValue);
-                } else if (paramsArraySize == 3)
+                } else if (paramsArraySize == 3&&(test1==NULL))
                 {
-                    minVal = cJSON_GetObjectItem(paramsArray, "min");
-                    if (minVal != NULL) {
-                        minValValue = minVal->valueint;
-                        printf("min: %d\n", minValValue);
-                    } else {
-                        printf("Error: Unable to get min value.\n");
-                    }
 
-                    maxVal = cJSON_GetObjectItem(paramsArray, "max");
-                    if (maxVal != NULL) {
-                        maxValValue = maxVal->valueint;
-                        printf("max: %d\n", maxValValue);
-                    } else {
-                        printf("Error: Unable to get max value.\n");
-                    }
-
-                    stepVal = cJSON_GetObjectItem(paramsArray, "step");
-                    if (stepVal != NULL) {
-                        stepValValue = stepVal->valueint;
-                        printf("step: %d\n", stepValValue);
-                    } else {
-                        printf("Error: Unable to get step value.\n");
-                    }
+                    minValValue=json_parser(paramsArray, "min");
+                    maxValValue=json_parser(paramsArray, "max");
+                    stepValValue=json_parser(paramsArray, "step");
                     j=3;
                 } else if ((strcmp(dataTypeValue, "string")==0)&&(paramsArraySize!=0)&&(test2!=NULL))
                 {
-                    paramLenVal = cJSON_GetObjectItem(params, "paramLen");
-                    paramLenValValue = paramLenVal->valueint;
-                    printf("paramLen: %d\n", paramLenValValue);
-
-                    wordVal = cJSON_GetObjectItem(params, "word");
-                    wordValValue = wordVal->valueint;
-                    printf("word: %d\n", wordValValue);    
-
-                    bitVal = cJSON_GetObjectItem(params, "bit");
-                    bitValValue = bitVal->valueint;
-                    printf("bit: %d\n", bitValValue);
-
-                    val = cJSON_GetObjectItem(params, "len");
-                    valValue = val->valueint;
-                    printf("len: %d\n", valValue); 
-
+                    paramLenValValue=json_parser(params, "paramLen");
+                    wordValValue=json_parser(params, "word");
+                    bitValValue=json_parser(params, "bit");
+                    valValue=json_parser(params, "len");
                 } 
 
             }
