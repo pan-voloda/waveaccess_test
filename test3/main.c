@@ -8,24 +8,20 @@
 int json_parser(cJSON* data, char* str)
 {
     cJSON* obj = cJSON_GetObjectItem(data, str);
-    int objValue = obj->valueint;
-    return objValue;
+    return obj->valueint;
 }
 int bit(int n)
 {
-int x=1;
-return x = x << n;
+return 1 << n;
 }
 int bits1(int len)
 {
-    int x = bit(len);
-    return x-1;
+    return bit(len)-1;
 }
 char* json_parser_str(cJSON* data, char* str)
 {
     cJSON* obj = cJSON_GetObjectItem(data, str);
-    char* objStr = obj->valuestring;
-    return objStr;
+    return obj->valuestring;
 }
 
 void extract_words(char *str, uint16_t *result) {
@@ -48,9 +44,7 @@ int bitmask(int len, int bit)
 {
     int x = 65535;
     int n = bits1(len);
-    int y =( (x >> abs(8-bit)) & n ) << abs(8-bit);
-
-    return y;
+    return ( (x >> abs(8-bit)) & n ) << abs(8-bit);
 }
 int main() {
     char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
@@ -87,11 +81,21 @@ int main() {
     int testDataArraySize = cJSON_GetArraySize(testDataArray);
 
     int nameValue;
-    char *dataTypeValue;
     int wordValue;
     int bitValue;
     int lenValue;
+    int realValValue;
+    int valValue;
     int paramsArraySize;
+    int paramLenValValue;
+    int minValValue;
+    int maxValValue;
+    int stepValValue;
+    int someval;
+    int mask;  
+
+    char *dataTypeValue;   
+    char* string;
 
     cJSON *testData;
     cJSON *word;
@@ -106,7 +110,7 @@ int main() {
 
     uint16_t cmd = 0;
     uint16_t cmd_str = 0;
-    int mask = 0;
+    
     for (int i = 0; i < testDataArraySize; i++) {
         testData = cJSON_GetArrayItem(testDataArray, i);
 
@@ -137,7 +141,7 @@ int main() {
 
         if( paramsArraySize == 0)
         {
-            char* string=json_parser_str(testData, "params");
+            string=json_parser_str(testData, "params");
             printf("string: %s\n", string);  
         }
         for (int j = 0; j < paramsArraySize; j++) 
@@ -148,8 +152,8 @@ int main() {
 
                 if((strcmp(dataTypeValue, "bool")==0 || strcmp(dataTypeValue, "int")==0)&&(test1!=NULL))
                 {
-                    int realValValue = json_parser(params, "realVal");
-                    int valValue=json_parser(params, "val");
+                    realValValue = json_parser(params, "realVal");
+                    valValue=json_parser(params, "val");
 
                     if(valValue==cmd)
                     {
@@ -167,10 +171,10 @@ int main() {
                 } else if (paramsArraySize == 3&&(test1==NULL))
                 {
 
-                    int minValValue=json_parser(paramsArray, "min");
-                    int maxValValue=json_parser(paramsArray, "max");
-                    int stepValValue=json_parser(paramsArray, "step");
-                    int someval = minValValue;
+                    minValValue=json_parser(paramsArray, "min");
+                    maxValValue=json_parser(paramsArray, "max");
+                    stepValValue=json_parser(paramsArray, "step");
+                    someval = minValValue;
                     for(int i = 0; i<cmd; i++)
                     {
                         someval+=stepValValue;
@@ -183,13 +187,13 @@ int main() {
                     j=3;
                 } else if ((strcmp(dataTypeValue, "string")==0)&&(paramsArraySize!=0)&&(test2!=NULL))
                 {
-                    int paramLenValValue=json_parser(params, "paramLen");
-                    int wordValValue=json_parser(params, "word");
-                    int bitValValue=json_parser(params, "bit");
-                    int lenValValue=json_parser(params, "len");
+                    paramLenValValue=json_parser(params, "paramLen");
+                    wordValue=json_parser(params, "word");
+                    bitValue=json_parser(params, "bit");
+                    lenValue=json_parser(params, "len");
 
-                    mask = bitmask(lenValValue, bitValValue);
-                    cmd_str = words[wordValValue-1] & mask;
+                    mask = bitmask(lenValue, bitValue);
+                    cmd_str = words[wordValue-1] & mask;
                     
                     printf("substring: %04x\n", cmd_str);
                 } 
