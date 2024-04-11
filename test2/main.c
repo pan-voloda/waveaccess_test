@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 int main() {
-    int a, b, temp;
+    unsigned long a, b, temp;
     printf("Введите a и b: ");
-    scanf("%d %d", &a, &b);
+    scanf("%lu %lu", &a, &b);
     temp=a;
     while(1)
     {
