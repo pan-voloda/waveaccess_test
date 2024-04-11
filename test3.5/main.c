@@ -25,7 +25,8 @@ int bits1(int len)
 int bitmask(int len, int bit)
 {
     int x = 65535;
-    int y = ( x << bit ) >> len;
+    int n = bits1(len);
+    int y =( (x >> abs(8-bit)) & n ) << abs(8-bit);
 
     return y;
 }
@@ -98,7 +99,7 @@ int main() {
     int lenValue;
     int paramsArraySize;
 
-    int realValValue, valValue, minValValue, maxValValue, stepValValue, paramLenValValue, wordValValue, bitValValue, newwordValValue;
+    int realValValue, valValue, minValValue, maxValValue, stepValValue, paramLenValValue, wordValValue, bitValValue;
 
     cJSON *testData;
     cJSON *word;
@@ -113,6 +114,7 @@ int main() {
     char* string="\0";
 
     uint16_t cmd = 0;
+    uint16_t cmd_str = 0;
     int mask = 0;
     for (int i = 0; i < testDataArraySize; i++) {
         testData = cJSON_GetArrayItem(testDataArray, i);
@@ -130,8 +132,9 @@ int main() {
             printf("Error: Unable to get word.\n");
             continue;
         }
+
         cmd = words[wordValue-1];
-        printf("command: %04x\n", cmd);
+        //printf("command: %04x\n", cmd);
         bitValue=json_parser(testData, "bit");
         lenValue=json_parser(testData, "len");
         //printf("bit:%d\n", bitValue);
@@ -142,7 +145,7 @@ int main() {
         //printf("mask: %04x\n", mask);
         cmd = cmd & mask;
         
-        printf("command: %04x\n", cmd);
+        //printf("command: %04x\n", cmd);
         //printBinary(cmd);
 
         paramsArray = cJSON_GetObjectItem(testData, "params");
@@ -214,12 +217,11 @@ int main() {
                     wordValValue=json_parser(params, "word");
                     bitValValue=json_parser(params, "bit");
                     lenValue=json_parser(params, "len");
-                    printf("bit: %d and len:%d\n",bitValValue,lenValue);
-                    printf("wordValValue: %04x\n", wordValValue);
+
                     mask = bitmask(lenValue, bitValValue);
-                    printf("mask: %04x\n", mask);
-                    wordValValue= wordValValue & mask;
-                    printf("string: %04x\n", wordValValue);
+                    cmd_str = words[wordValue-1] & mask;
+                    
+                    printf("substring: %04x\n", cmd_str);
                 } 
 
             }

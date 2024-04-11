@@ -44,7 +44,14 @@ void printBinary(unsigned int num) {
     }
     printf("%d\n", num & 1);
 }
+int bitmask(int len, int bit)
+{
+    int x = 65535;
+    int n = bits1(len);
+    int y =( (x >> abs(8-bit)) & n ) << abs(8-bit);
 
+    return y;
+}
 int main() {
     char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
     uint16_t words[20];
@@ -86,7 +93,7 @@ int main() {
     int lenValue;
     int paramsArraySize;
 
-    int realValValue, valValue, minValValue, maxValValue, stepValValue, paramLenValValue, wordValValue, bitValValue;
+    int realValValue, valValue, minValValue, maxValValue, stepValValue, paramLenValValue, wordValValue, bitValValue, lenValValue;
 
     cJSON *testData;
     cJSON *word;
@@ -101,6 +108,7 @@ int main() {
     char* string="\0";
 
     uint16_t cmd = 0;
+    uint16_t cmd_str = 0;
     int mask = 0;
     for (int i = 0; i < testDataArraySize; i++) {
         testData = cJSON_GetArrayItem(testDataArray, i);
@@ -183,7 +191,12 @@ int main() {
                     paramLenValValue=json_parser(params, "paramLen");
                     wordValValue=json_parser(params, "word");
                     bitValValue=json_parser(params, "bit");
-                    valValue=json_parser(params, "len");
+                    lenValValue=json_parser(params, "len");
+
+                    mask = bitmask(lenValValue, bitValValue);
+                    cmd_str = words[wordValValue-1] & mask;
+                    
+                    printf("substring: %04x\n", cmd_str);
                 } 
 
             }
