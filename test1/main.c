@@ -1,10 +1,10 @@
 #include <stdio.h>
 
 int main() {
-    int arr[4], max;
+    unsigned int arr[4], max;
 
     printf("Введите четыре числа: ");
-    scanf("%d %d %d %d", &arr[0], &arr[1], &arr[2], &arr[3]);
+    scanf("%u %u %u %u", &arr[0], &arr[1], &arr[2], &arr[3]);
 
     max = (arr[0] > arr[1]) ? arr[0] : arr[1];
     max = (max > arr[2]) ? max : arr[2];
@@ -14,7 +14,7 @@ int main() {
     {
         if (max-arr[i]!=0)
         {
-            printf("%d ", max-arr[i]);
+            printf("%u ", max-arr[i]);
         }
     }
 
