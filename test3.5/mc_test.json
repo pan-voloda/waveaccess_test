@@ -1,0 +1,888 @@
+{
+    "TestData": [
+        {
+            "name": 0,
+            "dataType": "bool",
+            "word": 1,
+            "bit": 14,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": false,
+                    "val": 0
+                },
+                {
+                    "realVal": true,
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "name": 1,
+            "dataType": "bool",
+            "word": 1,
+            "bit": 12,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": false,
+                    "val": 0
+                },
+                {
+                    "realVal": true,
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "name": 2,
+            "dataType": "bool",
+            "word": 1,
+            "bit": 11,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": false,
+                    "val": 0
+                },
+                {
+                    "realVal": true,
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "name": 3,
+            "dataType": "int",
+            "paramLen": 2,
+            "word": 1,
+            "bit": 9,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": 1,
+                    "val": 1
+                },
+                {
+                    "realVal": 2,
+                    "val": 0
+                }
+            ]
+        },
+        {
+            "name": 4,
+            "dataType": "bool",
+            "word": 1,
+            "bit": 8,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": false,
+                    "val": 0
+                },
+                {
+                    "realVal": true,
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "name": 5,
+            "dataType": "int",
+            "word": 1,
+            "bit": 0,
+            "len": 8,
+            "params": [
+                {
+                    "realVal": 0,
+                    "val": 0
+                },
+                {
+                    "realVal": 1,
+                    "val": 1
+                },
+                {
+                    "realVal": 2,
+                    "val": 2
+                },
+                {
+                    "realVal": 3,
+                    "val": 3
+                },
+                {
+                    "realVal": 4,
+                    "val": 4
+                },
+                {
+                    "realVal": 5,
+                    "val": 5
+                },
+                {
+                    "realVal": 6,
+                    "val": 6
+                },
+                {
+                    "realVal": 7,
+                    "val": 7
+                },
+                {
+                    "realVal": 8,
+                    "val": 8
+                },
+                {
+                    "realVal": 9,
+                    "val": 9
+                },
+                {
+                    "realVal": 10,
+                    "val": 10
+                },
+                {
+                    "realVal": 11,
+                    "val": 11
+                },
+                {
+                    "realVal": 12,
+                    "val": 12
+                },
+                {
+                    "realVal": 13,
+                    "val": 13
+                },
+                {
+                    "realVal": 14,
+                    "val": 14
+                },
+                {
+                    "realVal": 15,
+                    "val": 15
+                },
+                {
+                    "realVal": 16,
+                    "val": 16
+                },
+                {
+                    "realVal": 17,
+                    "val": 17
+                },
+                {
+                    "realVal": 18,
+                    "val": 18
+                },
+                {
+                    "realVal": 19,
+                    "val": 19
+                },
+                {
+                    "realVal": 20,
+                    "val": 20
+                },
+                {
+                    "realVal": 21,
+                    "val": 21
+                },
+                {
+                    "realVal": 22,
+                    "val": 22
+                },
+                {
+                    "realVal": 23,
+                    "val": 23
+                },
+                {
+                    "realVal": 24,
+                    "val": 24
+                },
+                {
+                    "realVal": 25,
+                    "val": 25
+                },
+                {
+                    "realVal": 26,
+                    "val": 26
+                },
+                {
+                    "realVal": 27,
+                    "val": 27
+                },
+                {
+                    "realVal": 28,
+                    "val": 28
+                },
+                {
+                    "realVal": 29,
+                    "val": 29
+                },
+                {
+                    "realVal": 30,
+                    "val": 30
+                },
+                {
+                    "realVal": 31,
+                    "val": 31
+                },
+                {
+                    "realVal": 32,
+                    "val": 32
+                },
+                {
+                    "realVal": 33,
+                    "val": 33
+                },
+                {
+                    "realVal": 34,
+                    "val": 34
+                },
+                {
+                    "realVal": 35,
+                    "val": 35
+                },
+                {
+                    "realVal": 36,
+                    "val": 36
+                },
+                {
+                    "realVal": 37,
+                    "val": 37
+                },
+                {
+                    "realVal": 38,
+                    "val": 38
+                },
+                {
+                    "realVal": 39,
+                    "val": 39
+                },
+                {
+                    "realVal": 40,
+                    "val": 40
+                },
+                {
+                    "realVal": 41,
+                    "val": 41
+                },
+                {
+                    "realVal": 42,
+                    "val": 42
+                },
+                {
+                    "realVal": 43,
+                    "val": 43
+                },
+                {
+                    "realVal": 44,
+                    "val": 44
+                },
+                {
+                    "realVal": 46,
+                    "val": 46
+                },
+                {
+                    "realVal": 47,
+                    "val": 47
+                },
+                {
+                    "realVal": 48,
+                    "val": 48
+                },
+                {
+                    "realVal": 49,
+                    "val": 49
+                },
+                {
+                    "realVal": 50,
+                    "val": 50
+                }
+            ]
+        },
+        {
+            "name": 6,
+            "dataType": "int",
+            "word": 2,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 300,
+                "step": 1
+            }
+        },
+        {
+            "name": 7,
+            "dataType": "int",
+            "word": 6,
+            "bit": 0,
+            "len": 8,
+            "params": { 
+                "min": 0,
+                "max": 100,
+                "step": 1
+            }
+        },
+        {
+            "name": 8,
+            "dataType": "int",
+            "word": 7,
+            "bit": 8,
+            "len": 8,
+            "params": [
+                {
+                    "realVal": 0,
+                    "val": 0
+                },
+                {
+                    "realVal": 1,
+                    "val": 1
+                },
+                {
+                    "realVal": 2,
+                    "val": 2
+                },
+                {
+                    "realVal": 3,
+                    "val": 3
+                },
+                {
+                    "realVal": 4,
+                    "val": 4
+                },
+                {
+                    "realVal": 5,
+                    "val": 5
+                }
+            ]
+        },
+        {
+            "name": 9,
+            "dataType": "int",
+            "word": 9,
+            "bit": 8,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 23,
+                "step": 1
+            }
+        },
+        {
+            "name": 10,
+            "dataType": "int",
+            "word": 9,
+            "bit": 0,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 59,
+                "step": 1
+            }
+        },
+        {
+            "name": 11,
+            "dataType": "int",
+            "word": 10,
+            "bit": 8,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 59,
+                "step": 1
+            }
+        },
+        {
+            "name": 12,
+            "dataType": "int",
+            "word": 10,
+            "bit": 0,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 255,
+                "step": 1
+            }
+        },
+        {
+            "name": 13,
+            "dataType": "int",
+            "word": 11,
+            "bit": 8,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 23,
+                "step": 1
+            }
+        },
+        {
+            "name": 14,
+            "dataType": "int",
+            "word": 11,
+            "bit": 0,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 59,
+                "step": 1
+            }
+        },
+        {
+            "name": 15,
+            "dataType": "bool",
+            "word": 13,
+            "bit": 6,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": false,
+                    "val": 0
+                },
+                {
+                    "realVal": true,
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "name": 16,
+            "dataType": "bool",
+            "word": 13,
+            "bit": 5,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": false,
+                    "val": 0
+                },
+                {
+                    "realVal": true,
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "name": 17,
+            "dataType": "bool",
+            "word": 13,
+            "bit": 3,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": false,
+                    "val": 0
+                },
+                {
+                    "realVal": true,
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "name": 18,
+            "dataType": "bool",
+            "word": 13,
+            "bit": 1,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": false,
+                    "val": 0
+                },
+                {
+                    "realVal": true,
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "name": 19,
+            "dataType": "int",
+            "word": 14,
+            "bit": 8,
+            "len": 8,
+            "params": [
+                {
+                    "realVal": 0,
+                    "val": 0
+                },
+                {
+                    "realVal": 1,
+                    "val": 1
+                },
+                {
+                    "realVal": 2,
+                    "val": 2
+                },
+                {
+                    "realVal": 3,
+                    "val": 3
+                },
+                {
+                    "realVal": 4,
+                    "val": 4
+                },
+                {
+                    "realVal": 5,
+                    "val": 5
+                },
+                {
+                    "realVal": 6,
+                    "val": 6
+                },
+                {
+                    "realVal": 7,
+                    "val": 7
+                },
+                {
+                    "realVal": 8,
+                    "val": 8
+                }
+            ]
+        },
+        {
+            "name": 20,
+            "dataType": "bool",
+            "word": 15,
+            "bit": 8,
+            "len": 1,
+            "params": [
+                {
+                    "realVal": false,
+                    "val": 0
+                },
+                {
+                    "realVal": true,
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "name": 21,
+            "dataType": "int",
+            "word": 15,
+            "bit": 3,
+            "len": 2,
+            "params": [
+                {
+                    "realVal": 1,
+                    "val": 1
+                },
+                {
+                    "realVal": 2,
+                    "val": 2
+                }
+            ]
+        },
+        {
+            "name": 22,
+            "dataType": "int",
+            "word": 16,
+            "bit": 8,
+            "len": 8,
+            "params": {
+                "min": 1,
+                "max": 30,
+                "step": 1
+            }
+        },
+        {
+            "name": 23,
+            "dataType": "int",
+            "word": 16,
+            "bit": 0,
+            "len": 8,
+            "params": {
+                "min": 1,
+                "max": 30,
+                "step": 1
+            }
+        },
+        {
+            "name": 24,
+            "dataType": "int",
+            "word": 17,
+            "bit": 0,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 30,
+                "step": 1
+            }
+        },
+        {
+            "name": 25,
+            "dataType": "int",
+            "word": 18,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 500,
+                "step": 1
+            }
+        },
+        {
+            "name": 26,
+            "dataType": "int",
+            "word": 19,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 500,
+                "step": 1
+            }
+        },
+        {
+            "name": 27,
+            "dataType": "int",
+            "word": 20,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 500,
+                "step": 1
+            }
+        },
+        {
+            "name": 28,
+            "dataType": "int",
+            "word": 21,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 500,
+                "step": 1
+            }
+        },
+        {
+            "name": 29,
+            "dataType": "int",
+            "word": 22,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 500,
+                "step": 1
+            }
+        },
+        {
+            "name": 30,
+            "dataType": "int",
+            "word": 23,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 500,
+                "step": 1
+            }
+        },
+        {
+            "name": 31,
+            "dataType": "int",
+            "word": 24,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 500,
+                "step": 1
+            }
+        },
+        {
+            "name": 32,
+            "dataType": "string",
+            "word": 26,
+            "bit": 0,
+            "len": 16,
+            "params": [
+                {
+                    "paramLen": 2,
+                    "word": 26,
+                    "bit": 8,
+                    "len": 8
+                },
+                {
+                    "paramLen": 2,
+                    "word": 26,
+                    "bit": 0,
+                    "len": 8
+                }
+            ]
+        },
+        {
+            "name": 33,
+            "dataType": "string",
+            "word": 27,
+            "bit": 0,
+            "len": 16,
+            "params": [
+                {
+                    "paramLen": 2,
+                    "word": 27,
+                    "bit": 8,
+                    "len": 8
+                },
+                {
+                    "paramLen": 2,
+                    "word": 27,
+                    "bit": 0,
+                    "len": 8
+                }
+            ]
+        },
+        {
+            "name": 34,
+            "dataType": "string",
+            "word": 28,
+            "bit": 0,
+            "len": 16,
+            "params": [
+                {
+                    "paramLen": 2,
+                    "word": 28,
+                    "bit": 8,
+                    "len": 8
+                },
+                {
+                    "paramLen": 2,
+                    "word": 28,
+                    "bit": 0,
+                    "len": 8
+                }
+            ]
+        },
+        {
+            "name": 35,
+            "dataType": "int",
+            "word": 29,
+            "bit": 0,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 30,
+                "step": 1
+            }
+        },
+        {
+            "name": 36,
+            "dataType": "int",
+            "word": 30,
+            "bit": 8,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 30,
+                "step": 1
+            }
+        },
+        {
+            "name": 37,
+            "dataType": "int",
+            "bit": 0,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 30,
+                "step": 1
+            }
+        },
+        {
+            "name": 38,
+            "dataType": "int",
+            "word": 31,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 300,
+                "step": 1
+            }
+        },
+        {
+            "name": 39,
+            "dataType": "int",
+            "word": 32,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 420,
+                "step": 1
+            }
+        },
+        {
+            "name": 40,
+            "dataType": "int",
+            "word": 33,
+            "bit": 0,
+            "len": 16,
+            "params": {
+                "min": 0,
+                "max": 400,
+                "step": 1
+            }
+        },
+        {
+            "name": 41,
+            "dataType": "int",
+            "word": 34,
+            "bit": 8,
+            "len": 8,
+            "params": {
+                "min": 0,
+                "max": 200,
+                "step": 1
+            }
+        },
+        {
+            "name": 42,
+            "dataType": "string",
+            "word": 34,
+            "bit": 0,
+            "len": 8,
+            "params": ""
+        },
+        {
+            "name": 43,
+            "dataType": "string",
+            "paramLen": 2,
+            "word": 35,
+            "bit": 8,
+            "len": 8,
+            "params": ""
+        },
+        {
+            "name": 44,
+            "dataType": "string",
+            "word": 35,
+            "bit": 0,
+            "len": 8,
+            "params": ""
+        },
+        {
+            "name": 45,
+            "dataType": "int",
+
+            "word": 36,
+            "bit": 0,
+            "len": 3,
+            "params": [
+                {
+                    "realVal": 0,
+                    "val": 0
+                },
+                {
+                    "realVal": 1,
+                    "val": 1
+                },
+                {
+                    "realVal": 2,
+                    "val": 2
+                }
+            ]
+        }
+    ]
+}
