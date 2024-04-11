@@ -93,8 +93,6 @@ int main() {
     int lenValue;
     int paramsArraySize;
 
-    int realValValue, valValue, minValValue, maxValValue, stepValValue, paramLenValValue, wordValValue, bitValValue, lenValValue;
-
     cJSON *testData;
     cJSON *word;
     cJSON *paramsArray;
@@ -105,7 +103,6 @@ int main() {
 
     cJSON *test1;
     cJSON *test2;
-    char* string="\0";
 
     uint16_t cmd = 0;
     uint16_t cmd_str = 0;
@@ -140,7 +137,7 @@ int main() {
 
         if( paramsArraySize == 0)
         {
-            string=json_parser_str(testData, "params");
+            char* string=json_parser_str(testData, "params");
             printf("string: %s\n", string);  
         }
         for (int j = 0; j < paramsArraySize; j++) 
@@ -151,10 +148,8 @@ int main() {
 
                 if((strcmp(dataTypeValue, "bool")==0 || strcmp(dataTypeValue, "int")==0)&&(test1!=NULL))
                 {
-                    realVal = cJSON_GetObjectItem(params, "realVal");
-                    realValValue = realVal->valueint;
-
-                    valValue=json_parser(params, "val");
+                    int realValValue = json_parser(params, "realVal");
+                    int valValue=json_parser(params, "val");
 
                     if(valValue==cmd)
                     {
@@ -172,9 +167,9 @@ int main() {
                 } else if (paramsArraySize == 3&&(test1==NULL))
                 {
 
-                    minValValue=json_parser(paramsArray, "min");
-                    maxValValue=json_parser(paramsArray, "max");
-                    stepValValue=json_parser(paramsArray, "step");
+                    int minValValue=json_parser(paramsArray, "min");
+                    int maxValValue=json_parser(paramsArray, "max");
+                    int stepValValue=json_parser(paramsArray, "step");
                     int someval = minValValue;
                     for(int i = 0; i<cmd; i++)
                     {
@@ -188,10 +183,10 @@ int main() {
                     j=3;
                 } else if ((strcmp(dataTypeValue, "string")==0)&&(paramsArraySize!=0)&&(test2!=NULL))
                 {
-                    paramLenValValue=json_parser(params, "paramLen");
-                    wordValValue=json_parser(params, "word");
-                    bitValValue=json_parser(params, "bit");
-                    lenValValue=json_parser(params, "len");
+                    int paramLenValValue=json_parser(params, "paramLen");
+                    int wordValValue=json_parser(params, "word");
+                    int bitValValue=json_parser(params, "bit");
+                    int lenValValue=json_parser(params, "len");
 
                     mask = bitmask(lenValValue, bitValValue);
                     cmd_str = words[wordValValue-1] & mask;
