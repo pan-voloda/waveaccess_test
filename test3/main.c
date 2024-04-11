@@ -9,7 +9,6 @@ int json_parser(cJSON* data, char* str)
 {
     cJSON* obj = cJSON_GetObjectItem(data, str);
     int objValue = obj->valueint;
-    //printf("%s: %d\n",str, objValue);
     return objValue;
 }
 int bit(int n)
@@ -26,7 +25,6 @@ char* json_parser_str(cJSON* data, char* str)
 {
     cJSON* obj = cJSON_GetObjectItem(data, str);
     char* objStr = obj->valuestring;
-    //printf("%s: %s\n",str, objStr);
     return objStr;
 }
 
@@ -76,7 +74,7 @@ int main() {
         } 
         cJSON_Delete(json); 
         return 1; 
-    } else printf("Parsed successfully\n"); 
+    } 
 
     cJSON *testDataArray = cJSON_GetObjectItem(json, "TestData");
     int testDataArraySize = cJSON_GetArraySize(testDataArray);
@@ -114,7 +112,6 @@ int main() {
         if (word != NULL) 
         {
             wordValue = word->valueint;
-            //printf("word: %d\n", wordValue);
         } else {
             printf("Error: Unable to get word.\n");
         }
@@ -125,22 +122,13 @@ int main() {
         cmd = words[wordValue-1];
         bitValue=json_parser(testData, "bit");
         lenValue=json_parser(testData, "len");
-        //printf("bit:%d\n", bitValue);
-        //printf("len:%d\n", lenValue);
+
         cmd = cmd >> (16-(bitValue+lenValue));
-        //printf("cmd: %04x\n", cmd);
         mask = bits1(lenValue);
-        //printf("mask: %04x\n", mask);
         cmd = cmd & mask;
-        
-        //printf("command: %04x\n", cmd);
-        //printBinary(cmd);
 
         paramsArray = cJSON_GetObjectItem(testData, "params");
         paramsArraySize = cJSON_GetArraySize(paramsArray);
-
-        //printf("paramsArraySize: %d\n", paramsArraySize);
-
 
         if( paramsArraySize == 0)
         {
@@ -157,15 +145,6 @@ int main() {
                 {
                     realVal = cJSON_GetObjectItem(params, "realVal");
                     realValValue = realVal->valueint;
-
-                    // if(strcmp(dataTypeValue,"bool")==0)
-                    // {
-                    //     printf("realVal: %s\n", realValValue ? "true" : "false");
-                    // }
-                    // else if(strcmp(dataTypeValue,"int")==0)
-                    // {
-                    //     printf("realVal: %d\n", realValValue);
-                    // }
 
                     valValue=json_parser(params, "val");
 
