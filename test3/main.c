@@ -34,7 +34,8 @@ void extract_words(char *str, uint16_t *result) {
     }
 }
 
-void printBinary(unsigned int num) {
+void printBinary(unsigned int num) 
+{
     if (num > 1) {
         printBinary(num >> 1);
     }
@@ -194,8 +195,8 @@ int main() {
 
                     mask = bitmask(lenValue, bitValue);
                     cmd_str = words[wordValue-1] & mask;
-                    
-                    printf("substring: %04x\n", cmd_str);
+                    cmd_str = cmd_str >> (lenValue-bitValue);
+                    printf("substring: %02x\n", cmd_str);
                 } 
 
             }

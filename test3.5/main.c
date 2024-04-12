@@ -8,34 +8,20 @@
 int json_parser(cJSON* data, char* str)
 {
     cJSON* obj = cJSON_GetObjectItem(data, str);
-    int objValue = obj->valueint;
-    //printf("%s: %d\n",str, objValue);
-    return objValue;
+    return obj->valueint;
 }
 int bit(int n)
 {
-int x=1;
-return x = x << n;
+return 1 << n;
 }
 int bits1(int len)
 {
-    int x = bit(len);
-    return x-1;
-}
-int bitmask(int len, int bit)
-{
-    int x = 65535;
-    int n = bits1(len);
-    int y =( (x >> abs(8-bit)) & n ) << abs(8-bit);
-
-    return y;
+    return bit(len)-1;
 }
 char* json_parser_str(cJSON* data, char* str)
 {
     cJSON* obj = cJSON_GetObjectItem(data, str);
-    char* objStr = obj->valuestring;
-    //printf("%s: %s\n",str, objStr);
-    return objStr;
+    return obj->valuestring;
 }
 
 void extract_words(char *str, uint16_t *result) {
@@ -47,19 +33,22 @@ void extract_words(char *str, uint16_t *result) {
         result[j] = strtol(temp, NULL, 16); 
     }
 }
-
-void printBinary(unsigned int num) {
+void printBinary(unsigned int num) 
+{
     if (num > 1) {
         printBinary(num >> 1);
     }
     printf("%d\n", num & 1);
 }
-
+int bitmask(int len, int bit)
+{
+    int x = 65535;
+    int n = bits1(len);
+    return ( (x >> abs(8-bit)) & n ) << abs(8-bit);
+}
 int main() {
     char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
-    //char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
     uint16_t words[45];
-    memset(words,0,45);
     extract_words(str, words);
 
     printf("Результат:\n");
@@ -87,19 +76,26 @@ int main() {
         cJSON_Delete(json); 
         return 1; 
     } 
-    // else printf("Parsed successfully\n"); 
 
     cJSON *testDataArray = cJSON_GetObjectItem(json, "TestData");
     int testDataArraySize = cJSON_GetArraySize(testDataArray);
 
     int nameValue;
-    char *dataTypeValue;
     int wordValue;
     int bitValue;
     int lenValue;
+    int realValValue;
+    int valValue;
     int paramsArraySize;
+    int paramLenValValue;
+    int minValValue;
+    int maxValValue;
+    int stepValValue;
+    int someval;
+    int mask;  
 
-    int realValValue, valValue, minValValue, maxValValue, stepValValue, paramLenValValue, wordValValue, bitValValue;
+    char *dataTypeValue;   
+    char* string;
 
     cJSON *testData;
     cJSON *word;
@@ -111,11 +107,10 @@ int main() {
 
     cJSON *test1;
     cJSON *test2;
-    char* string="\0";
 
     uint16_t cmd = 0;
     uint16_t cmd_str = 0;
-    int mask = 0;
+    
     for (int i = 0; i < testDataArraySize; i++) {
         testData = cJSON_GetArrayItem(testDataArray, i);
 
@@ -126,33 +121,24 @@ int main() {
         if (word != NULL) 
         {
             wordValue = word->valueint;
-            //printf("word: %d\n", wordValue);
-            
         } else {
             printf("Error: Unable to get word.\n");
-            continue;
         }
-
+        if(wordValue>45)
+        {
+            break;
+        }
         cmd = words[wordValue-1];
-        //printf("command: %04x\n", cmd);
+        printf("command %04x\n", cmd);
         bitValue=json_parser(testData, "bit");
         lenValue=json_parser(testData, "len");
-        //printf("bit:%d\n", bitValue);
-        //printf("len:%d\n", lenValue);
+
         cmd = cmd >> (16-(bitValue+lenValue));
-        //printf("cmd: %04x\n", cmd);
         mask = bits1(lenValue);
-        //printf("mask: %04x\n", mask);
         cmd = cmd & mask;
-        
-        //printf("command: %04x\n", cmd);
-        //printBinary(cmd);
 
         paramsArray = cJSON_GetObjectItem(testData, "params");
         paramsArraySize = cJSON_GetArraySize(paramsArray);
-
-        //printf("paramsArraySize: %d\n", paramsArraySize);
-
 
         if( paramsArraySize == 0)
         {
@@ -167,18 +153,7 @@ int main() {
 
                 if((strcmp(dataTypeValue, "bool")==0 || strcmp(dataTypeValue, "int")==0)&&(test1!=NULL))
                 {
-                    realVal = cJSON_GetObjectItem(params, "realVal");
-                    realValValue = realVal->valueint;
-
-                    // if(strcmp(dataTypeValue,"bool")==0)
-                    // {
-                    //     printf("realVal: %s\n", realValValue ? "true" : "false");
-                    // }
-                    // else if(strcmp(dataTypeValue,"int")==0)
-                    // {
-                    //     printf("realVal: %d\n", realValValue);
-                    // }
-
+                    realValValue = json_parser(params, "realVal");
                     valValue=json_parser(params, "val");
 
                     if(valValue==cmd)
@@ -200,7 +175,7 @@ int main() {
                     minValValue=json_parser(paramsArray, "min");
                     maxValValue=json_parser(paramsArray, "max");
                     stepValValue=json_parser(paramsArray, "step");
-                    int someval = minValValue;
+                    someval = minValValue;
                     for(int i = 0; i<cmd; i++)
                     {
                         someval+=stepValValue;
@@ -214,14 +189,14 @@ int main() {
                 } else if ((strcmp(dataTypeValue, "string")==0)&&(paramsArraySize!=0)&&(test2!=NULL))
                 {
                     paramLenValValue=json_parser(params, "paramLen");
-                    wordValValue=json_parser(params, "word");
-                    bitValValue=json_parser(params, "bit");
+                    wordValue=json_parser(params, "word");
+                    bitValue=json_parser(params, "bit");
                     lenValue=json_parser(params, "len");
-
-                    mask = bitmask(lenValue, bitValValue);
-                    cmd_str = words[wordValue-1] & mask;
                     
-                    printf("substring: %04x\n", cmd_str);
+                    mask = bitmask(lenValue, bitValue);
+                    cmd_str = words[wordValue-1] & mask;
+                    cmd_str = cmd_str >> (lenValue-bitValue);
+                    printf("substring2: %02x\n", cmd_str);
                 } 
 
             }
