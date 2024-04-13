@@ -5,13 +5,9 @@ int main() {
     printf("Введите a и b: ");
     scanf("%u %u", &a, &b);
     temp=a;
-    while(1)
+    while(temp%b!=0)
     {
-        if(temp%b!=0)
-        {
-            temp++;
-        }
-        else break;
+        temp++;
     }
     printf("%u", temp-a);
     return 0;
