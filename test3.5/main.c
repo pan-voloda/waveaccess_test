@@ -10,13 +10,9 @@ int json_parser(cJSON* data, char* str)
     cJSON* obj = cJSON_GetObjectItem(data, str);
     return obj->valueint;
 }
-int bit(int n)
-{
-return 1 << n;
-}
 int bits1(int len)
 {
-    return bit(len)-1;
+    return (1 << len) - 1;
 }
 char* json_parser_str(cJSON* data, char* str)
 {
@@ -33,26 +29,14 @@ void extract_words(char *str, uint16_t *result) {
         result[j] = strtol(temp, NULL, 16); 
     }
 }
-void printBinary(unsigned int num) 
-{
-    if (num > 1) {
-        printBinary(num >> 1);
-    }
-    printf("%d\n", num & 1);
-}
-int bitmask(int len, int bit)
-{
-    int x = 65535;
-    int n = bits1(len);
-    return ( (x >> abs(8-bit)) & n ) << abs(8-bit);
-}
+
 int main() {
     char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
     uint16_t words[45];
     extract_words(str, words);
 
     printf("Результат:\n");
-    for (int i = 0; i < 21; i++) {
+    for (int i = 0; i < 45; i++) {
         printf("%04x ", words[i]); 
     }
     printf("\n");
@@ -95,7 +79,7 @@ int main() {
     int mask;  
 
     char *dataTypeValue;   
-    char *string;
+    char* string;
 
     cJSON *testData;
     cJSON *word;
@@ -124,12 +108,8 @@ int main() {
         } else {
             printf("Error: Unable to get word.\n");
         }
-        if(wordValue>45)
-        {
-            break;
-        }
+
         cmd = words[wordValue-1];
-        printf("command %04x\n", cmd);
         bitValue=json_parser(testData, "bit");
         lenValue=json_parser(testData, "len");
 
@@ -192,11 +172,11 @@ int main() {
                     wordValue=json_parser(params, "word");
                     bitValue=json_parser(params, "bit");
                     lenValue=json_parser(params, "len");
-                    
+
                     mask = bits1(lenValue+(8-bitValue));
                     cmd_str = words[wordValue-1] & mask;
                     cmd_str = cmd_str >> (16-(lenValue+bitValue));
-                    printf("substring2: %02x\n", cmd_str);
+                    printf("substring: %02x\n", cmd_str);
                 } 
 
             }

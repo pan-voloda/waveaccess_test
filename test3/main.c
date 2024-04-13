@@ -10,13 +10,9 @@ int json_parser(cJSON* data, char* str)
     cJSON* obj = cJSON_GetObjectItem(data, str);
     return obj->valueint;
 }
-int bit(int n)
-{
-return 1 << n;
-}
 int bits1(int len)
 {
-    return bit(len)-1;
+    return (1 << len) - 1;
 }
 char* json_parser_str(cJSON* data, char* str)
 {
@@ -183,6 +179,7 @@ int main() {
                     mask = bits1(lenValue+(8-bitValue));
                     cmd_str = words[wordValue-1] & mask;
                     cmd_str = cmd_str >> (16-(lenValue+bitValue));
+                    printf("substring: %02x\n", cmd_str);
                 } 
 
             }
