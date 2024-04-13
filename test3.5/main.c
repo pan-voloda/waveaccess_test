@@ -95,7 +95,7 @@ int main() {
     int mask;  
 
     char *dataTypeValue;   
-    char* string;
+    char *string;
 
     cJSON *testData;
     cJSON *word;
@@ -193,9 +193,9 @@ int main() {
                     bitValue=json_parser(params, "bit");
                     lenValue=json_parser(params, "len");
                     
-                    mask = bitmask(lenValue, bitValue);
+                    mask = bits1(lenValue+(8-bitValue));
                     cmd_str = words[wordValue-1] & mask;
-                    cmd_str = cmd_str >> (lenValue-bitValue);
+                    cmd_str = cmd_str >> (16-(lenValue+bitValue));
                     printf("substring2: %02x\n", cmd_str);
                 } 
 

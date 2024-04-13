@@ -34,19 +34,6 @@ void extract_words(char *str, uint16_t *result) {
     }
 }
 
-void printBinary(unsigned int num) 
-{
-    if (num > 1) {
-        printBinary(num >> 1);
-    }
-    printf("%d\n", num & 1);
-}
-int bitmask(int len, int bit)
-{
-    int x = 65535;
-    int n = bits1(len);
-    return ( (x >> abs(8-bit)) & n ) << abs(8-bit);
-}
 int main() {
     char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
     uint16_t words[20];
@@ -193,10 +180,9 @@ int main() {
                     bitValue=json_parser(params, "bit");
                     lenValue=json_parser(params, "len");
 
-                    mask = bitmask(lenValue, bitValue);
+                    mask = bits1(lenValue+(8-bitValue));
                     cmd_str = words[wordValue-1] & mask;
-                    cmd_str = cmd_str >> (lenValue-bitValue);
-                    printf("substring: %02x\n", cmd_str);
+                    cmd_str = cmd_str >> (16-(lenValue+bitValue));
                 } 
 
             }
