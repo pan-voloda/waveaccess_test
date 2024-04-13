@@ -176,9 +176,9 @@ int main() {
                     bitValue=json_parser(params, "bit");
                     lenValue=json_parser(params, "len");
 
-                    mask = bits1(lenValue+(8-bitValue));
-                    cmd_str = words[wordValue-1] & mask;
-                    cmd_str = cmd_str >> (16-(lenValue+bitValue));
+                    cmd_str = words[wordValue-1] >> (16-(lenValue+bitValue));
+                    mask = bits1(lenValue);
+                    cmd_str = cmd_str & mask;
                     printf("substring: %02x\n", cmd_str);
                 } 
 
