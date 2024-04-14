@@ -80,6 +80,7 @@ int main() {
 
     char *dataTypeValue;   
     char string[4];
+    char substring[2];
 
     cJSON *testData;
     cJSON *word;
@@ -177,7 +178,8 @@ int main() {
                     cmd_str = words[wordValue-1] >> (16-(lenValue+bitValue));
                     mask = bits1(lenValue);
                     cmd_str = cmd_str & mask;
-                    printf("substring: %02x\n", cmd_str);
+                    sprintf(substring, "%02x", cmd_str);
+                    printf("substring: %s\n", substring);
                 } 
 
             }

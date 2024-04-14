@@ -80,6 +80,7 @@ int main() {
 
     char *dataTypeValue;   
     char* string;
+    char* substring;
 
     cJSON *testData;
     cJSON *word;
@@ -129,18 +130,17 @@ int main() {
             printf("string: %s\n", string);
         }
         for (int j = 0; j < paramsArraySize; j++) 
+        {
+            params = cJSON_GetArrayItem(paramsArray, j);
+            test1 = cJSON_GetObjectItem(params, "realVal");
+            test2 = cJSON_GetObjectItem(params, "paramLen");
+
+            if((strcmp(dataTypeValue, "bool")==0 || strcmp(dataTypeValue, "int")==0)&&(test1!=NULL))
             {
-                params = cJSON_GetArrayItem(paramsArray, j);
-                test1 = cJSON_GetObjectItem(params, "realVal");
-                test2 = cJSON_GetObjectItem(params, "paramLen");
-
-                if((strcmp(dataTypeValue, "bool")==0 || strcmp(dataTypeValue, "int")==0)&&(test1!=NULL))
+                realValValue = json_parser(params, "realVal");
+                valValue=json_parser(params, "val");
+                if(valValue==cmd)
                 {
-                    realValValue = json_parser(params, "realVal");
-                    valValue=json_parser(params, "val");
-
-                    if(valValue==cmd)
-                    {
                     if(strcmp(dataTypeValue,"bool")==0)
                     {
                         printf("%s\n", realValValue ? "true" : "false");
@@ -149,44 +149,40 @@ int main() {
                     {
                         printf("%d\n", realValValue);
                     }
-                        
-                    }
+                }
 
-                } else if (paramsArraySize == 3&&(test1==NULL))
+            } else if (paramsArraySize == 3&&(test1==NULL))
+            {
+                minValValue=json_parser(paramsArray, "min");
+                maxValValue=json_parser(paramsArray, "max");
+                stepValValue=json_parser(paramsArray, "step");
+                someval = minValValue;
+                for(int i = 0; i<cmd; i++)
                 {
-
-                    minValValue=json_parser(paramsArray, "min");
-                    maxValValue=json_parser(paramsArray, "max");
-                    stepValValue=json_parser(paramsArray, "step");
-                    someval = minValValue;
-                    for(int i = 0; i<cmd; i++)
+                    someval+=stepValValue;
+                    if(someval>=maxValValue)
                     {
-                        someval+=stepValValue;
-                        if(someval>=maxValValue)
-                        {
-                            someval=minValValue+(someval-maxValValue);
-                        }
+                        someval=minValValue+(someval-maxValValue);
                     }
-                    printf("%d\n", someval);
-                    j=3;
-                } else if ((strcmp(dataTypeValue, "string")==0)&&(paramsArraySize!=0)&&(test2!=NULL))
-                {
-                    paramLenValValue=json_parser(params, "paramLen");
-                    wordValue=json_parser(params, "word");
-                    bitValue=json_parser(params, "bit");
-                    lenValue=json_parser(params, "len");
+                }
+                printf("%d\n", someval);
+                j=3;
+            } else if ((strcmp(dataTypeValue, "string")==0)&&(paramsArraySize!=0)&&(test2!=NULL))
+            {
+                paramLenValValue=json_parser(params, "paramLen");
+                wordValue=json_parser(params, "word");
+                bitValue=json_parser(params, "bit");
+                lenValue=json_parser(params, "len");
 
-                    cmd_str = words[wordValue-1] >> (16-(lenValue+bitValue));
-                    mask = bits1(lenValue);
-                    cmd_str = cmd_str & mask;
-                    printf("substring: %02x\n", cmd_str);
-                } 
-
-            }
-
+                cmd_str = words[wordValue-1] >> (16-(lenValue+bitValue));
+                mask = bits1(lenValue);
+                cmd_str = cmd_str & mask;
+                sprintf(substring, "%02x", cmd_str);
+                printf("substring: %s\n", substring);
+            } 
+        }
         printf("\n");
     }
-
     cJSON_Delete(json);
     return 0;
 }
