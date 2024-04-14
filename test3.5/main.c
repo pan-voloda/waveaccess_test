@@ -31,7 +31,7 @@ void extract_words(char *str, uint16_t *result) {
 }
 
 int main() {
-    char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c";
+    char str[] = "043200b4000000000000010000b4003b00000000100301001f0000000000000000b400b501001f003c043200b4000000000000010000b4003b00000000100301001f00b400b501001f003c00b400b501001f003c";
     uint16_t words[45];
     extract_words(str, words);
 
@@ -79,7 +79,7 @@ int main() {
     int mask;  
 
     char *dataTypeValue;   
-    char* string;
+    char string[4];
 
     cJSON *testData;
     cJSON *word;
@@ -110,6 +110,7 @@ int main() {
         }
 
         cmd = words[wordValue-1];
+        //printf("cmd: %04x\n", cmd);
         bitValue=json_parser(testData, "bit");
         lenValue=json_parser(testData, "len");
 
@@ -122,8 +123,8 @@ int main() {
 
         if( paramsArraySize == 0)
         {
-            string=json_parser_str(testData, "params");
-            printf("string: %s\n", string);  
+            sprintf(string, "%04x", words[wordValue-1]);
+            printf("string: %s\n", string);
         }
         for (int j = 0; j < paramsArraySize; j++) 
             {

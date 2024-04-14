@@ -125,8 +125,8 @@ int main() {
 
         if( paramsArraySize == 0)
         {
-            string=json_parser_str(testData, "params");
-            printf("string: %s\n", string);  
+            sprintf(string, "%04x", words[wordValue-1]);
+            printf("string: %s\n", string);
         }
         for (int j = 0; j < paramsArraySize; j++) 
             {
