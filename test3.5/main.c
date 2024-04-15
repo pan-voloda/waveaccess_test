@@ -64,37 +64,21 @@ int main() {
     cJSON *testDataArray = cJSON_GetObjectItem(json, "TestData");
     int testDataArraySize = cJSON_GetArraySize(testDataArray);
 
-    int nameValue;
-    int wordValue;
-    int bitValue;
-    int lenValue;
-    int realValValue;
-    int valValue;
-    int paramsArraySize;
-    int paramLenValValue;
-    int minValValue;
-    int maxValValue;
-    int stepValValue;
-    int someval;
-    int mask;  
+    int nameValue, wordValue, bitValue, lenValue;
+    int paramsArraySize, paramLenValValue;
+    int realValValue, valValue;
+    int minValValue, maxValValue, stepValValue;
+    int someval, mask;  
 
     char *dataTypeValue;   
-    char string[4];
-    char substring[2];
+    char string[4], substring[2];
 
-    cJSON *testData;
-    cJSON *word;
-    cJSON *paramsArray;
+    cJSON *testData, *word;
+    cJSON *paramsArray, *params;
+    cJSON *realVal, *val;
+    cJSON *test1, *test2;
 
-    cJSON *params;
-    cJSON *realVal;
-    cJSON *val;
-
-    cJSON *test1;
-    cJSON *test2;
-
-    uint16_t cmd = 0;
-    uint16_t cmd_str = 0;
+    uint16_t cmd, cmd_str;
     
     for (int i = 0; i < testDataArraySize; i++) {
         testData = cJSON_GetArrayItem(testDataArray, i);

@@ -2,7 +2,7 @@
 
 int main() {
     unsigned int a, b, temp;
-    printf("Введите a и b: ");
+    printf("\n Введите a и b: ");
     scanf("%u %u", &a, &b);
     temp=a;
     while(temp%b!=0)

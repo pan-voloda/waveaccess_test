@@ -3,7 +3,7 @@
 int main() {
     unsigned int arr[4], max;
 
-    printf("Введите четыре числа: ");
+    printf("\n Введите четыре числа: ");
     scanf("%u %u %u %u", &arr[0], &arr[1], &arr[2], &arr[3]);
     max=arr[0];
     for(int i=1; i<=3; i++)
