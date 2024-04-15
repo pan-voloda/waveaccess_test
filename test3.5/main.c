@@ -21,12 +21,11 @@ char* json_parser_str(cJSON* data, char* str)
 }
 
 void extract_words(char *str, uint16_t *result) {
-    int i, j;
     char temp[5]; 
-    for (i = 0, j = 0; i < strlen(str); i += 4, j++) {
+    for (int i = 0; i < strlen(str); i += 4) {
         strncpy(temp, &str[i], 4); 
         temp[4] = '\0'; 
-        result[j] = strtol(temp, NULL, 16); 
+        result[i/4] = strtol(temp, NULL, 16); 
     }
 }
 
