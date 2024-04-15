@@ -1,14 +1,9 @@
 #include <stdio.h>
 
 int main() {
-    unsigned int a, b, temp;
+    unsigned int a, b;
     printf("\n Введите a и b: ");
     scanf("%u %u", &a, &b);
-    temp=a;
-    while(temp%b!=0)
-    {
-        temp++;
-    }
-    printf("%u", temp-a);
+    printf("%u", b-a%b);
     return 0;
 }

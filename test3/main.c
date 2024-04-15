@@ -132,7 +132,7 @@ int main() {
                     }
                 }
 
-            } else if (paramsArraySize == 3&&(test1==NULL))
+            } else if ((paramsArraySize == 3)&&(test1==NULL))
             {
                 minValValue=json_parser(paramsArray, "min");
                 maxValValue=json_parser(paramsArray, "max");
